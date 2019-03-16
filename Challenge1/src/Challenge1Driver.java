@@ -28,9 +28,8 @@ public class Challenge1Driver extends Configured implements Tool {
 		}
 		String inputDir = args[0]; // path dell'input directory in HDFS
 		String outputDir = args[1]; // path dell'output directory in HDFS
-
-		Configuration config = new Configuration();
-		Job job = Job.getInstance(config, "Job Name: Challenge1");
+ 
+		Job job = Job.getInstance(getConf(), "Job Name: Challenge1");
 		job.setJarByClass(Challenge1Driver.class); // Indico la classe che costituirà l'entry point del job
 		job.setMapperClass(Challenge1Mapper.class);
 		job.setReducerClass(Challenge1Reducer.class);
