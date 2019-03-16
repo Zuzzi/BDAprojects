@@ -2,56 +2,56 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import org.apache.hadoop.io.Writable;
-import org.apache.hadoop.io.Text;
+//import org.apache.hadoop.io.Text;
 
 public class Challenge1CustomTupla implements Writable {
 
-	private Text starRating;
-	private Text idUtente;
+	private int starRating;
+	private long idUtente;
 
 	public Challenge1CustomTupla() {
-	this.starRating = new Text("");
-	this.idUtente = new Text("");
+	this.starRating = 0;
+	this.idUtente = 0;
 	}
 
 	
-	public Challenge1CustomTupla(Text starRating, Text idUtente) {
+	public Challenge1CustomTupla(int starRating, long idUtente) {
 	this.starRating = starRating;
 	this.idUtente = idUtente;
 	}
 
 
 
-	public Text getStarRating() {
+	public int getStarRating() {
 	return starRating;
 	}
 
-	public Text getIdUtente() {
+	public long getIdUtente() {
 	return idUtente;
 	}
 
-	public void setStarRating(Text starRating) {
+	public void setStarRating(int starRating) {
 	this.starRating = starRating;
 	}
 
-	public void setIdUtente(Text idUtente) {
+	public void setIdUtente(long idUtente) {
 	this.idUtente = idUtente;
 	}
 
 
 	@Override
 	public String toString() {
-	return starRating.toString() + "\t" + idUtente.toString();
+	return this.starRating + "\t" + this.idUtente;
 	}
 
 	public void readFields(DataInput in) throws IOException {
-		starRating.readFields(in);
-		idUtente.readFields(in);
+		starRating = in.readInt(); 
+		idUtente = in.readLong();
 	}
 
 	public void write(DataOutput out) throws IOException {
-		starRating.write(out);
-		idUtente.write(out);
+		out.writeInt(starRating);
+		out.writeLong(idUtente);
 	}
 
 
