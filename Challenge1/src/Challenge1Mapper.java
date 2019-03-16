@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.StringTokenizer;
+import java.util.HashSet;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -31,12 +32,15 @@ protected void map(LongWritable key, Text value, Context context) throws IOExcep
 	String starRating = fields[7];
 
 	StringTokenizer parole = new StringTokenizer(reviewBody, " .,?!;:()[]{}'");
+	HashSet<String> set = new HashSet<String>();
 	while (parole.hasMoreTokens()) {
 		String parola = parole.nextToken().toLowerCase();
-		if (parola.equals("")) { //ignoro le stringhe vuote
+		/*if (parola.equals("")) { //ignoro le stringhe vuote
 			continue;
-		}
-		context.write(new Text(parola), new Challenge1CustomTupla(new Text(starRating), new Text(idUtente)));
+		}*/
+		if (set.add(parola)) {
+			context.write(new Text(parola), new Challenge1CustomTupla(new Text(starRating), new Text(idUtente)));
+			}
 		}
 	}
 

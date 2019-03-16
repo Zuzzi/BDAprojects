@@ -25,8 +25,9 @@ protected void reduce(Text key, Iterable<Challenge1CustomTupla> values, Context 
 		}
 	}
  	media = nrOcc/nrUtenti;
-	context.write(key, new FloatWritable(media));
-
+	if (media > 1) {
+		context.write(key, new FloatWritable(media));
+	}
 }
 
 
