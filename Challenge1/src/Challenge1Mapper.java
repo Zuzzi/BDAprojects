@@ -27,8 +27,8 @@ protected void map(LongWritable key, Text value, Context context) throws IOExcep
 
 	} */
 	String reviewBody = fields[13];
-	String idUtente = fields[1];
-	String starRating = fields[7];
+	long idUtente = Long.parseLong(fields[1]);
+	int starRating = Integer.parseInt(fields[7]);
 
 	StringTokenizer parole = new StringTokenizer(reviewBody, " .,?!;:()[]{}'");
 	while (parole.hasMoreTokens()) {
@@ -36,7 +36,7 @@ protected void map(LongWritable key, Text value, Context context) throws IOExcep
 		if (parola.equals("")) { //ignoro le stringhe vuote
 			continue;
 		}
-		context.write(new Text(parola), new Challenge1CustomTupla(new Text(starRating), new Text(idUtente)));
+		context.write(new Text(parola), new Challenge1CustomTupla(starRating, idUtente));
 		}
 	}
 
