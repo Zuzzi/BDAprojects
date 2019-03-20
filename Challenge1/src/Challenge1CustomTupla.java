@@ -2,7 +2,11 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import org.apache.hadoop.io.Writable;
-//import org.apache.hadoop.io.Text;
+
+/* 
+Classe che rappresenta un tipo di dato custom da utilizzare 
+per rappresentare la coppia di valori "star rating" e "id utente" 
+*/
 
 public class Challenge1CustomTupla implements Writable {
 
@@ -14,13 +18,10 @@ public class Challenge1CustomTupla implements Writable {
 	this.idUtente = 0;
 	}
 
-	
 	public Challenge1CustomTupla(int starRating, long idUtente) {
 	this.starRating = starRating;
 	this.idUtente = idUtente;
 	}
-
-
 
 	public int getStarRating() {
 	return starRating;
@@ -38,6 +39,11 @@ public class Challenge1CustomTupla implements Writable {
 	this.idUtente = idUtente;
 	}
 
+	/*
+	I seguenti metodi appartengono all'interfaccia Writable di conseguenza 
+	devono essere implementati 
+	*/
+	
 
 	@Override
 	public String toString() {
@@ -53,8 +59,6 @@ public class Challenge1CustomTupla implements Writable {
 		out.writeInt(starRating);
 		out.writeLong(idUtente);
 	}
-
-
-
+	
 
 }
