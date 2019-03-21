@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -31,16 +30,15 @@ public class Challenge1Driver extends Configured implements Tool {
  
 		Job job = Job.getInstance(getConf(), "Job Name: Challenge1");
 		job.setJarByClass(Challenge1Driver.class); // Indico la classe che costituirà l'entry point del job
-		job.setMapperClass(Challenge1Mapper.class);
-		job.setReducerClass(Challenge1Reducer.class);
-		job.setPartitionerClass(Challenge1Partitioner.class);
+		job.setMapperClass(Challenge1Mapper.class); // Indico la classe che costituirà il Mapper
+		job.setReducerClass(Challenge1Reducer.class); // Indico la classe che costituirà il Reducer
+		job.setPartitionerClass(Challenge1Partitioner.class); // Indico la classe che costituirà il Partitioner
 
-		job.setNumReduceTasks(5);
+		job.setNumReduceTasks(5); // Numero di file di Task Reducer -> file di output
 		job.setOutputKeyClass(Text.class); // la classe rappresentante il data type dell'output key
 		job.setOutputValueClass(FloatWritable.class); // la classe rappresentante il data type dell'output value
-		job.setMapOutputKeyClass(Text.class); // la classe rappresentante il data type dell'output key
-		job.setMapOutputValueClass(Challenge1CustomTupla.class); // la classe rappresentante il data type dell'output value
-
+		job.setMapOutputKeyClass(Text.class); // la classe rappresentante il data type dell'output key del Mapper
+		job.setMapOutputValueClass(Challenge1CustomTupla.class); // la classe rappresentante il data type dell'output value del Mapper
 
 		FileInputFormat.addInputPath(job, new Path(inputDir));
 		FileOutputFormat.setOutputPath(job, new Path(outputDir));
